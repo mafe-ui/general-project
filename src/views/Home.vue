@@ -13,6 +13,11 @@ export default {
   name: 'Home',
   components: {
     HelloWorld
-  }
+  },
+      sockets: {
+        servermessage(data) {
+            console.log(data)
+        }
+    },
 }
 </script>
