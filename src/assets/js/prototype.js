@@ -48,7 +48,40 @@ function clickButton() {
         this.subMitState = true
     }, 5000)
 }
-
+/**
+ * @param { number } type 1 localStorage 2 sessionStorage
+ * @param { string } key 键
+ * @param { string } data 要存储的数据
+ */
+function addStorageEvent(type, key, data) {
+    if (type === 1) {
+        // 创建一个StorageEvent事件
+        var newStorageEvent = document.createEvent('StorageEvent');
+        const storage = {
+            setItem: function(k, val) {
+                localStorage.setItem(k, val);
+                // 初始化创建的事件
+                newStorageEvent.initStorageEvent('setItem', false, false, k, null, val, null, null);
+                // 派发对象
+                window.dispatchEvent(newStorageEvent);
+            }
+        }
+        return storage.setItem(key, data);
+    } else {
+        // 创建一个StorageEvent事件
+        var newStorageEvent = document.createEvent('StorageEvent');
+        const storage = {
+            setItem: function(k, val) {
+                sessionStorage.setItem(k, val);
+                // 初始化创建的事件
+                newStorageEvent.initStorageEvent('setItem', false, false, k, null, val, null, null);
+                // 派发对象
+                window.dispatchEvent(newStorageEvent);
+            }
+        }
+        return storage.setItem(key, data);
+    }
+}
 //处理 “判断是否重复请求”
 function dataToken() {
     getdatatoken({}).then(r => {
@@ -64,5 +97,6 @@ export default {
         Vue.prototype.$removeLocal = removeLocal
         Vue.prototype.$clickButton = clickButton
         Vue.prototype.$dataToken = dataToken
+        Vue.prototype.$addStorageEvent = addStorageEvent
     }
 }

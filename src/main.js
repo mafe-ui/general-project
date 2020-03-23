@@ -17,12 +17,6 @@ Vue.use(prototypes)
     // cookie
 import VueCookies from 'vue-cookies'
 Vue.use(VueCookies)
-    // 监听localStorage,**兼容性问题，到时记得封装
-import Tools from '@/assets/js/tools'
-Vue.use(Tools)
-    // 为了解决setItemEvent不立即生效，使用事件派发强制更高
-Tools.dispatchEventStroage()
-Tools.dispatchEventStroage_S() //
 
 // websocket
 // import '@/assets/js/socket'

@@ -1,5 +1,25 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div>
+    about
+    <button @click="requestTest">requestTest</button>
   </div>
 </template>
+
+<script>
+import { getPushurl } from '@/plugins/axios'
+export default {
+  methods: {
+    requestTest(){
+      let pms = {pms:1};
+      getPushurl(pms).then(r => {
+        console.log(r)
+      })
+    }
+  }
+}
+</script>
+
+<style>
+
+</style>
+

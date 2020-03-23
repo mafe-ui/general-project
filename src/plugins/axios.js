@@ -227,8 +227,9 @@ axios.interceptors.response.use(undefined, function axiosRetryInterceptor(err) {
 });
 
 //------------------------------------
-export const getPushurl = () => {
-    return axios.get("/api/getpushurl");
+export const getPushurl = pms => {
+    const params = qs.stringify(pms);
+    return axios.get("/api/getpushurl?" + params);
 };
 //获取是否重复请求得token
 export const getdatatoken = pms => {
