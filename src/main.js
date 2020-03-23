@@ -11,6 +11,7 @@ import vueFilter from '@/assets/js/computedFilter'
 for (let key in vueFilter) {
     Vue.filter(key, vueFilter[key])
 }
+
 // 挂在原型链上的函数
 import prototypes from '@/assets/js/prototype.js'
 Vue.use(prototypes)

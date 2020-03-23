@@ -78,7 +78,12 @@ export default {
         date.setDate(1); //本月第一天
         return this.timeFormat(date, type);
     },
-    //格式化日期
+    /**
+     *格式化日期
+     * @param {String} dt
+     * @param {String} type
+     * @returns 日期
+     */
     timeFormat(dt, type) { //type:yyyy/mm/dd hh:mm:ss   yyyy-mm-dd 
         let date = new Date(dt);
         let year = date.getFullYear(); //年
