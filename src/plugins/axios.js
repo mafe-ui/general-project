@@ -94,11 +94,10 @@ axios.interceptors.response.use(undefined, function axiosRetryInterceptor(err) {
         // Reject with the error
         clearTimeout(time);
         time = null;
+
         // Vue.$vux.loading.hide();
         // Vue.$vux.toast.text("连接超时，请稍后重试...", "middle");
-        Vue.prototype.$Notice.warning({
-            title: VueI18n.t('m.common.outTime'),
-        });
+
         return Promise.reject(err);
     }
 

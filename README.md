@@ -189,6 +189,7 @@ localStorage.clear()
 </template>
 ````
 
+
 #### 2.自定义时间
 
 > v-preventReClick=“2000” (2000s 之后可以进行下一次点击)
@@ -198,4 +199,76 @@ localStorage.clear()
     <button @click="requestTest" v-preventReClick="2000">requestTest</button>
 </template>
 ````
+### 五、格式化时间及其他方法
+> 源码: /src/assets/js/dateFilter.js
+#### 用法
+* 在js中调用
+```
+<script>
+import dateFilter from '@/assets/js/dateFilter'
+
+export default {
+  name: 'Home',
+  mounted(){
+    console.log(dateFilter.getToday('mm/dd'));
+  }
+}
+</script>
+```
+* 在template中使用
+方法一：写成公共文件
+main.js
+```
+//引入公共篩選方法
+import dateFilter from '@/assets/js/dateFilter'
+for (let key in dateFilter) {
+    Vue.filter(key, dateFilter[key])
+}
+```
+```
+<template>
+  <div class="home">
+    <span>日期格式化：{{day | timeFormat}}</span>
+  </div>
+</template>
+export default {
+  name: 'Home',
+  data(){
+    return {
+      day:new Date()
+    }
+  },
+}
+```
+方法二：重新封装过滤器
+```
+<template>
+  <div class="home">
+    <span>日期格式化：{{day | newDataFormat}}</span><br/><br/>
+  </div>
+</template>
+
+<script>
+// @ is an alias to /src
+import dateFilter from '@/assets/js/dateFilter'
+
+export default {
+  name: 'Home',
+  data(){
+    return {
+      day:new Date(),
+    }
+  },
+  filters: {
+      newDataFormat(date,type) {
+          return dateFilter.timeFormat(date,type);
+      }
+  }
+}
+</script>
+
+```
+
+
+
 
