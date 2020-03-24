@@ -1,23 +1,14 @@
 import axios from "axios";
 import Vue from "vue";
-import store from "../store";
-import router from "../router";
 import VueI18n from '@/assets/js/locale/i18n.js'
-import codeBack from '@/assets/js/codeBack.js'
 
 
 var qs = require("qs");
 
-// 限制快速点击
-var requesting = [];
-var limitTime = 2000; //請求間隔時間
-var requestingId = "";
-
 var time = null;
 
-Vue.prototype.$dataToken;
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === "development") { //开发环境
     axios.defaults.baseURL = "http://192.168.0.109:6598"; //李勇       
 } else {
     axios.defaults.baseURL = ipconfig;
@@ -27,25 +18,21 @@ Vue.prototype.$axios = axios.defaults.baseURL;
 
 // 显示loading
 let loadingFn = config => {
-    if (config.data && config.data.toString().indexOf("noLoading") >= 0) {} else {
-        clearTimeout(time);
-        time = setTimeout(() => {
-            // Vue.$vux.loading.show({
-            //     text: ''
-            // })
-        }, 1000);
-    }
+    clearTimeout(time);
+    time = setTimeout(() => {
+        // Vue.$vux.loading.show({
+        //     text: ''
+        // })
+    }, 1000);
 };
 //不可發送多次請求的接口
-let unrepeatStr =
-    "/api/forgetpwdverify,/api/reg,/api/order/submitorder,/api/user/cancelorder,/api/order/aheadcloseorder,/api/saveurlinfo,/api/savesonurlinfo,/api/saveibinfo,/api/recharge,/api/addbankcard,/api/addcreditcard,/api/withdraw,";
+let unrepeatStr = "/api/forgetpwdverify,/api/reg";
 
 // 添加请求拦截器
 axios.interceptors.request.use(
     function(config) {
         // 添加token
         let token = localStorage.getItem("Token");
-        let idempotence = store.state.transactionOther.idempotence;
         // 切换语言
         function lang() {
             // 将选择的语言存在localStorage中
@@ -59,44 +46,9 @@ axios.interceptors.request.use(
         if (token) {
             config.headers.common["Authorization"] = "Bearer " + token;
         }
-        if (idempotence) {
-            config.headers.common["Idempotence"] = idempotence;
-        }
 
-        // 限制快速点击
-        var requestingId = JSON.stringify(config.data);
-        if (config.method === "post" && requestingId) {
-            let nowTime = new Date().getTime();
-            requesting = requesting.filter(item => {
-                return item.startTime + limitTime > nowTime;
-            });
-            let sessionUrl = requesting.filter(item => {
-                return item.requestingId === requestingId;
-            });
 
-            if (sessionUrl.length > 0) {
-                // 请求重复 中断请求
-                let configUrl = config.url;
-                let newUrl = configUrl.substring(configUrl.indexOf("/api"));
-                if (unrepeatStr.indexOf(newUrl) >= 0) {
-                    config.url = "/api/getdatatoken";
-                    config.method = "post";
-                }
-                return config;
-            } else {
-                let item = {
-                    requestingId: requestingId,
-                    startTime: nowTime
-                };
-                requesting.push(item);
 
-                loadingFn(config);
-                return config;
-            }
-        } else {
-            loadingFn(config);
-            return config;
-        }
     },
     function(error) {
         // 对请求错误做些什么
@@ -109,67 +61,7 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
     function(response) {
         // 对响应数据做点什么
-        clearTimeout(time);
-        time = null;
-        // Vue.$vux.loading.hide();
-        var routerPath = router.history.current.fullPath;
-        if (response.data.code == "-100") {
-            //token过期或为空
-            if (
-                routerPath.indexOf("main/mine") == -1 &&
-                routerPath.indexOf("register") == -1 &&
-                routerPath.indexOf("login") == -1 &&
-                routerPath.indexOf("forgetPassword") == -1
-            ) {
-                // 路由守卫
-                if (
-                    routerPath.indexOf("register") == -1 &&
-                    routerPath.indexOf("login") == -1
-                ) {
-                    removeLocal();
-                }
-            }
-            store.state.loginPath = routerPath;
 
-            function removeLocal() {
-                localStorage.removeItem("Token");
-                localStorage.removeItem("Role");
-                localStorage.removeItem("Area");
-                localStorage.removeItem("Code");
-                localStorage.removeItem("TopRegTokenCode");
-            }
-            sessionStorage.removeItem("UserInfo");
-            router.push({ name: "login" })
-        } else if (
-            response.data.hasOwnProperty("rst") &&
-            response.data.rst != true &&
-            response.data.msg
-        ) {
-            //请求失败
-            // if (
-            //     // routerPath.indexOf("login") == -1 &&
-            //     routerPath.indexOf("register") == -1
-            // ) {
-            if (response.data.code != '-105') {
-                let str = codeBack.setCode(response.data.code, response.data.param)
-                    // Vue.$vux.toast.text(str, 'middle')
-                Vue.prototype.$Notice.warning({
-                    title: str
-                });
-                if (response.data.code != 37) {
-                    Vue.prototype.$dataToken;
-                }
-            }
-            // Vue.prototype.$Notice.warning({
-            //     title: response.data.msg,
-            // });
-            // Vue.$vux.toast.text(response.data.msg, "middle");
-            //      Vue.$vux.toast.text('连接超时，请稍后重试...', 'middle')
-            // if (response.data.code != 37) {
-            //     Vue.prototype.$dataToken;
-            // }
-            // }
-        }
         return response;
 
     },
