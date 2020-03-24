@@ -175,35 +175,67 @@ localStorage.clear()
 },
 ````
 
-## 四、限制重复点击(v-preventReClick)使用方法
+## 四、限制重复点击使用方法
 
 > 指令源码：/src/assets/js/repeat-click.js
+>
+> v-preventReClick ：只适用于button
+>
+> v-asyncClick	 	：所有标签
 
-#### 1.默认时间
+|               v-asyncClick               |       v-preventReClick       |
+| :--------------------------------------: | :--------------------------: |
+|        event: requestTest(事件名)        | v-preventReClick(事件正常写) |
+| delayTime:2000(相隔多久可进行第二次点击) |   v-preventReClick=“2000”    |
 
-> v-preventReClick 默认时间3000
+#### 例如：
 
-````html
+````js
 <template>
+    //v-asyncClick
+    
+    //(默认时间)
+     <div v-asyncClick="{event: requestTest}">requestTest</div>
+	//  (2000s 之后可以进行下一次点击)
+	<div v-asyncClick="{event: requestTest,delayTime:2000}">requestTest</div>
+
+----------------------------------------------------------------------------------
+	//v-preventReClick
+    
+    //(默认时间)
     <button @click="requestTest" v-preventReClick>requestTest</button>
+	// (2000s 之后可以进行下一次点击)
+   <button @click="requestTest" v-preventReClick="2000">requestTest</button>
+	
 </template>
+
+
+<script>
+export default {
+  methods: {
+    requestTest(e){
+      console.log(666)
+    },
+  }
+};
+</script>
 ````
 
+## 五、格式化时间及其他方法
 
-#### 2.自定义时间
-
-> v-preventReClick=“2000” (2000s 之后可以进行下一次点击)
-
-````html
-<template>
-    <button @click="requestTest" v-preventReClick="2000">requestTest</button>
-</template>
-````
-### 五、格式化时间及其他方法
 > 源码: /src/assets/js/dateFilter.js
 #### 用法
+| 可获取的时间                   | 写法                                                         |
+| :----------------------------- | :----------------------------------------------------------- |
+| 日期格式化                     | dateFilter.timeFormat('2019-07-08','yyyy/mm')    //2019/07   |
+| 今天日期                       | dateFilter.getToday('mm/dd')      //03/24                    |
+| 某个日期的前几天或几天后的日期 | dateFilter.getIntervalDay('2019-07-08',-10)  //2019/06/28 负数为前几天，正数为后几天 |
+| date的n个月前的今天的日期      | dateFilter.getPreMonth('2019-07-08',6)//2010/1/8负数为前几天，正数为后几天 |
+| 某天的那周第一天               | dateFilter.getFirstDayOfWeek(new Date());//2020-03-23        |
+| 本月第一天                     | dateFilter.getFirstDayOfMonth();//2020-03-1                  |
+
 * 在js中调用
-```
+```js
 <script>
 import dateFilter from '@/assets/js/dateFilter'
 
@@ -218,14 +250,14 @@ export default {
 * 在template中使用
 方法一：写成公共文件
 main.js
-```
+```js
 //引入公共篩選方法
 import dateFilter from '@/assets/js/dateFilter'
 for (let key in dateFilter) {
     Vue.filter(key, dateFilter[key])
 }
 ```
-```
+```js
 <template>
   <div class="home">
     <span>日期格式化：{{day | timeFormat}}</span>
@@ -241,7 +273,7 @@ export default {
 }
 ```
 方法二：重新封装过滤器
-```
+```js
 <template>
   <div class="home">
     <span>日期格式化：{{day | newDataFormat}}</span><br/><br/>
@@ -268,18 +300,18 @@ export default {
 </script>
 
 ```
-### 六、数据过滤
+## 六、数据过滤
 > 源码: /src/assets/js/computedFilter.js
 #### 用法
 main.js
-```
+```js
 //引入公共过滤方法
 import vueFilter from '@/assets/js/computedFilter'
 for (let key in vueFilter) {
     Vue.filter(key, vueFilter[key])
 }
 ```
-```
+```html
 <template>
   <div class="home">
     <span>{{'0.234234234' | numPrecise(3)}}</span>

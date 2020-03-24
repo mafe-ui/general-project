@@ -16,9 +16,9 @@ for (let key in vueFilter) {
 import prototypes from '@/assets/js/prototype.js'
 Vue.use(prototypes)
 
-// 限制重复点击
-import repeatClick from '@/assets/js/repeat-click.js'
-Vue.use(repeatClick)
+//限制重复点击
+import repeatclick from '@/assets/js/repeat-click.js'
+Vue.use(repeatclick)
 
 // cookie
 import VueCookies from 'vue-cookies'

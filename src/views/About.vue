@@ -1,25 +1,21 @@
 <template>
   <div>
     about
-    <button @click="requestTest" v-preventReClick>requestTest</button>
+     <div v-asyncClick="{event: requestTest,delayTime:500}">requestTest</div>
+     <button @click="requestTest" v-preventReClick>preventReClick</button>
+    <!-- @click="scienceClick($event,requestTest)" -->
   </div>
 </template>
 
 <script>
-import { getPushurl } from '@/plugins/axios'
+import { getPushurl } from "@/plugins/axios";
 export default {
   methods: {
-    requestTest(){
-      let pms = {pms:1};
-      getPushurl(pms).then(r => {
-        console.log(r)
-      })
-    }
+    requestTest(e){
+      console.log(666)
+    },
   }
-}
+};
 </script>
 
-<style>
-
-</style>
-
+<style></style>
