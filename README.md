@@ -268,6 +268,24 @@ export default {
 </script>
 
 ```
+### 六、数据过滤
+> 源码: /src/assets/js/computedFilter.js
+#### 用法
+main.js
+```
+//引入公共过滤方法
+import vueFilter from '@/assets/js/computedFilter'
+for (let key in vueFilter) {
+    Vue.filter(key, vueFilter[key])
+}
+```
+```
+<template>
+  <div class="home">
+    <span>{{'0.234234234' | numPrecise(3)}}</span>
+  </div>
+</template>
+```
 
 
 

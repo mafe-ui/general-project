@@ -18,6 +18,9 @@ const vFilter = {
         let result = parseInt(dif * Math.pow(10, len * 1));
         return result
     },
+    trim(s) { //去掉左右空格
+        return s.replace(/(^\s*)|(\s*$)/g, "");
+    },
     //保留多少小數位，四捨五入
     numCount(data, num) { //data：返回数据 num：需要长度
         var arr = [];
@@ -31,9 +34,6 @@ const vFilter = {
             len = arr[1].length;
         }
         return (data * 1).toFixed(len * 1)
-    },
-    trim(s) { //去掉左右空格
-        return s.replace(/(^\s*)|(\s*$)/g, "");
     },
     //保留多少小數位，不四捨五入
     numPrecise(data, num) { //data：返回数据 num：位數
