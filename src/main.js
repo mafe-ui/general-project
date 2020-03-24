@@ -15,7 +15,12 @@ for (let key in vueFilter) {
 // 挂在原型链上的函数
 import prototypes from '@/assets/js/prototype.js'
 Vue.use(prototypes)
-    // cookie
+
+// 限制重复点击
+import repeatClick from '@/assets/js/repeat-click.js'
+Vue.use(repeatClick)
+
+// cookie
 import VueCookies from 'vue-cookies'
 Vue.use(VueCookies)
 

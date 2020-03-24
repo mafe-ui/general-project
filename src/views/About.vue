@@ -1,7 +1,7 @@
 <template>
   <div>
     about
-    <button @click="requestTest">requestTest</button>
+    <button @click="requestTest" v-preventReClick>requestTest</button>
   </div>
 </template>
 

@@ -97,7 +97,7 @@ export default {
 
 ## 二、国际化用法(vue-i18n)
 
-#### 写法：
+#### 1.写法
 
 中文：/src/assets/js/locale/lang/zh.js
 
@@ -119,7 +119,7 @@ export const m = {
 }
 ````
 
-#### 用法：
+#### 2.用法
 
 ````vue
 <template>
@@ -173,5 +173,29 @@ localStorage.clear()
       console.log(e);
   });
 },
+````
+
+## 四、限制重复点击(v-preventReClick)使用方法
+
+> 指令源码：/src/assets/js/repeat-click.js
+
+#### 1.默认时间
+
+> v-preventReClick 默认时间3000
+
+````html
+<template>
+    <button @click="requestTest" v-preventReClick>requestTest</button>
+</template>
+````
+
+#### 2.自定义时间
+
+> v-preventReClick=“2000” (2000s 之后可以进行下一次点击)
+
+````html
+<template>
+    <button @click="requestTest" v-preventReClick="2000">requestTest</button>
+</template>
 ````
 
