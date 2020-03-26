@@ -57,7 +57,6 @@ figcaption {
     text-decoration: none;
     border: none;
     font-weight: normal;
-    font-family: 'pingfang', PingFangSC-Light, helvetica, 'Heiti SC';
     box-sizing: border-box;
     font-size: $size_default;
     font-style: normal;
@@ -66,10 +65,6 @@ figcaption {
     &:hover {
         outline: none;
     }
-}
-
-.pf_thick {
-    font-weight: bold;
 }
 
 a,
@@ -89,8 +84,6 @@ body {
     width: 100%;
     height: 100%;
     -webkit-font-smoothing: antialiased;
-    background: #fff;
-    color: #333;
 }
 
 // 禁止用户选中
@@ -111,12 +104,6 @@ input {
 
 input[disabled] {
     background: $line_color;
-}
-
-textarea[disabled] {
-    background: $line_color;
-    -webkit-appearance: none;
-    opacity: 1;
 }
 
 ::-webkit-scrollbar {
@@ -143,17 +130,9 @@ textarea[disabled] {
     zoom: 1;
 }
 
-strong {
-    font-weight: 400;
-}
-
-.wapper_page {
-    background: $bg_color;
-    position: relative;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+//ios--input--只有下划线时，圆角去除
+.input_radius {
+    border-radius: 0;
 }
 
 .over_line {
@@ -176,34 +155,9 @@ strong {
     /** 隐藏超出的内容 **/
 }
 
+//使得数据加载出来之前不显示{{}}
 [v-cloak] {
     display: none;
-}
-
-
-/*设置红绿色*/
-
-.red {
-    color: $text_red;
-}
-
-.green {
-    color: $text_green;
-}
-
-.bg_red {
-    color: $text_red;
-    background: $text_red_opacity;
-}
-
-.bg_green {
-    color: $text_green;
-    background: $text_green_opacity;
-}
-
-.bg_gray {
-    color: #aaa;
-    background: rgba(240, 240, 240, .8);
 }
 
 //btn
@@ -218,27 +172,10 @@ strong {
     outline: none;
 }
 
-.btn_go {
-    background: $sel_color;
-    color: white;
-    border: 1px solid $sel_color;
-}
-
-.btn_border {
-    color: $sel_color;
-    border: 1px solid $sel_color;
-}
-
 .btn[disabled] {
     background: #ebebeb;
     border: 1px solid #EBEBEB;
     color: white;
-}
-
-.btn_no {
-    background: rgba(0, 0, 0, 0);
-    border: 0;
-    outline: none;
 }
 
 .btns_buy_sell {
@@ -297,76 +234,6 @@ strong {
         display: block;
         padding-top: rem(2);
     }
-}
-
-//x-header
-.wapper_header {
-    .vux-header {
-        height: rem(88);
-        background: white;
-        position: sticky;
-        z-index: 399;
-        top: 0;
-    }
-    .vux-header .vux-header-title {
-        color: $text_3;
-        font-size: rem(30);
-        font-weight: bold;
-        //      font-family: 'pingfang-thick';
-    }
-    .vux-header .vux-header-left .left-arrow:before {
-        border-color: $text_3;
-        width: rem(20);
-        height: rem(20);
-    }
-    .vux-header .vux-header-left,
-    .vux-header .vux-header-right {
-        top: rem(25);
-    }
-    .vux-header .vux-header-left a,
-    .vux-header .vux-header-left button,
-    .vux-header .vux-header-right a,
-    .vux-header .vux-header-right button {
-        color: $sel_color;
-        font-size: rem(30);
-    }
-    .vux-header .vux-header-left .back {
-        margin-top: rem(-5);
-        margin-left: rem(-10);
-    }
-}
-
-.wapper_invite .vux-header .vux-header-left {
-    top: 0;
-    padding: rem(20) 0;
-}
-
-.wapper_details .vux-header .vux-header-title {
-    color: white;
-}
-
-.header_line .vux-header {
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.hrader_transaction .vux-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-}
-
-.wapper_header.details .vux-header .vux-header-title {
-    color: white;
-}
-
-.wapper_header.task .vux-header .vux-header-right {
-    right: 0;
-}
-
-.header_right0.wapper_header .vux-header .vux-header-right {
-    right: 0;
-    top: rem(20);
 }
 
 //switch
@@ -473,61 +340,6 @@ strong {
     }
 }
 
-//中的
-.switch_string.switch_middle {
-    .swiching {
-        width: rem(104);
-        height: rem(46);
-        background: $sel_color;
-    }
-    i {
-        display: inline-block;
-        width: rem(38);
-        height: rem(38);
-        top: rem(4);
-        left: rem(4);
-        box-shadow: 0 0 rem(10) 0 rgba(0, 0, 0, .3);
-        animation: swich_right1 .3s ease-in-out forwards;
-    }
-    .swiching_no {
-        background: #eeeeee;
-    }
-    .swich_circle {
-        animation: swich_left1 .3s ease-in-out forwards;
-    }
-}
-
-//小的
-.switch_string.switch_small {
-    .swiching {
-        width: rem(86);
-    }
-    i {
-        animation: swich_left2 .3s ease-in-out forwards;
-    }
-    .swich_circle {
-        animation: swich_right2 .3s ease-in-out forwards;
-    }
-}
-
-@keyframes swich_right2 {
-    from {
-        left: rem(4);
-    }
-    to {
-        left: rem(42);
-    }
-}
-
-@keyframes swich_left2 {
-    from {
-        left: rem(42);
-    }
-    to {
-        left: rem(4);
-    }
-}
-
 .radio_group {
     text-align: left;
     label {
@@ -582,214 +394,4 @@ strong {
     .radio_type:checked+label {
         color: $sel_color;
     }
-}
-
-
-/*popup*/
-
-.vux-popup-dialog {
-    background: white;
-    .title {
-        height: rem(80);
-        display: flex;
-        justify-content: space-between;
-        border-bottom: 1px solid $line_color;
-        .btn {
-            color: $sel_color;
-            line-height: rem(80);
-            font-size: rem(30);
-        }
-        .btn_close_icon {
-            color: #333;
-            font-size: rem(50);
-        }
-        span {
-            font-size: rem(30);
-            text-align: center;
-            flex-grow: 1;
-            color: $text_3;
-            line-height: rem(80);
-        }
-    }
-    .btn_close_icon {
-        color: #333;
-        font-size: rem(50);
-        line-height: rem(80);
-        position: absolute;
-        z-index: 9;
-    }
-}
-
-
-/*手风琴*/
-
-.rewards .van-cell {
-    padding: rem(16) 0;
-    border: 0;
-    position: initial;
-}
-
-.rewards .van-cell__title {
-    height: rem(40);
-}
-
-.rewards .van-collapse-item__wrapper .van-collapse-item__content {
-    padding: 0;
-}
-
-.rewards .van-cell__left-icon,
-.rewards .van-cell__right-icon {
-    line-height: rem(40);
-    height: rem(40);
-}
-
-.agent_rewards .van-cell {
-    padding: rem(25) 0;
-}
-
-//加载样式
-.vux-loadmore {
-    width: 50%;
-    height: rem(180);
-    vertical-align: top;
-    margin: rem(20) auto 0;
-}
-
-.weui-loadmore_line {
-    height: rem(150);
-    margin: rem(50) auto 0;
-}
-
-//加载样式---无导航
-.no_footBar .vux-loadmore {
-    width: 50%;
-    height: rem(80);
-    vertical-align: top;
-    margin: rem(20) auto 0;
-}
-
-.no_footBar .weui-loadmore_line {
-    height: rem(50);
-    margin: rem(50) auto 0;
-}
-
-//ios下滑线圆角去除
-.input_radius {
-    border-radius: 0;
-    border-bottom: 1px solid #cccccc;
-}
-
-//调整message行高
-.message {
-    p {
-        input {
-            line-height: rem(50);
-            height: rem(40);
-            top: rem(35)!important;
-            // height: 60%!important;
-        }
-    }
-}
-
-.weui-toast_text .weui-toast__content {
-    padding: rem(20);
-}
-
-.badge {
-    background: #ff6562;
-    color: white;
-    padding: rem(3) rem(8) 0;
-    line-height: rem(27);
-    min-width: rem(30);
-    border-radius: rem(15) rem(15) rem(15) rem(4);
-    position: absolute;
-    top: rem(5);
-    font-size: rem(24);
-    transform: scale(.8);
-}
-
-.mt-range {
-    margin-left: rem(100);
-    margin-right: rem(10);
-    .mt-range-progress {
-        background-color: #c59c5a;
-        top: 40%;
-    }
-    .mt-range-runway {
-        background-color: #f0f0f0;
-        border-top-color: #f0f0f0;
-        top: 40%;
-        right: rem(-46);
-    }
-    .mt-range-thumb {
-        width: rem(46);
-        height: rem(46);
-    }
-    .range_start,
-    .range_end {
-        color: #ccc;
-        margin-top: rem(40);
-        position: absolute;
-        left: 0;
-    }
-    .range_end {
-        left: auto;
-        right: rem(10);
-    }
-}
-
-//产品详情
-.operation2 .swiper-pagination {
-    width: 100vw;
-    height: rem(20);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    bottom: rem(0);
-    padding: 0;
-    margin: 0;
-    .swiper-pagination-bullet {
-        display: inline-block;
-        width: rem(10);
-        height: rem(10);
-        background: #cccccc;
-        border-radius: 50%;
-        margin: rem(5);
-    }
-    .swiper-pagination-bullet-active {
-        width: rem(14);
-        height: rem(14);
-        background: #19ba4f;
-    }
-}
-
-.swiper-container1 .swiper-pagination1 {
-    width: 100vw;
-    height: rem(20);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    bottom: rem(40);
-    padding: 0;
-    margin: 0;
-    .swiper-pagination-bullet {
-        display: inline-block;
-        width: rem(10);
-        height: rem(10);
-        background: #cccccc;
-        border-radius: 50%;
-        margin: rem(5);
-    }
-    .swiper-pagination-bullet-active {
-        width: rem(14);
-        height: rem(14);
-        background: #19ba4f;
-    }
-}
-
-.noSubmit {
-    background-color: #ccc!important;
-    color: #fff!important;
 }

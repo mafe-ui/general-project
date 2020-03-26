@@ -1,0 +1,66 @@
+<template>
+  <div class="button-con">
+    <button :class=cls :data-text="btnText" v-if="hoverType && hoverType==2"  @click="reButton" :disabled="disabled">
+        <span v-for="(text,t) in btnText" :key="t">{{text}}</span>
+    </button>
+    <button :class=cls :data-text="btnText" v-else  @click="reButton" :disabled="disabled">
+        <span><slot></slot></span>
+    </button>
+  </div>
+</template>
+
+<script>
+// @ is an alias to /src
+
+export default {
+  name: "eButton",
+  props: {
+    hoverType: String,
+    focusType: String,
+    inverted: Boolean,
+    disabled: Boolean,
+  },
+  data() {
+    return {
+      btnText: "",
+      cls: "button",
+      btns:0,
+    };
+  },
+  mounted() {
+    this.btnText = this.$slots.default[0].text;
+
+    if (this.hoverType && this.hoverType == 1) {
+      this.cls = "button button--winona";
+    } else if (this.hoverType && this.hoverType == 2) {
+      this.cls = "button button--nina";
+    } else if (this.hoverType && this.hoverType == 3) {
+      this.cls = "button button--wayra";
+    }
+
+  
+
+    if (this.inverted) {
+      this.cls += " button--inverted";
+    }
+  },
+  methods: {
+    reButton() {
+      if (this.focusType && this.focusType == 1) {
+        this.cls += " button--moema";
+      } else if (this.focusType && this.focusType == 2) {
+        this.cls += " button--wapasha";
+      }
+
+      setTimeout(() => {
+        this.cls = this.cls.replace(" button--moema",'');
+        this.cls = this.cls.replace(" button--wapasha",'');
+      }, 500);
+    }
+  }
+};
+</script>
+
+<style lang="scss">
+@import "./style.scss";
+</style>
