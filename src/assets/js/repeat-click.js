@@ -40,7 +40,6 @@ vueAsyncClick.install = function(Vue) {
                             isWork = false;
                             let type = Object.prototype.toString.call(workSpace[key].event);
                             await workSpace[key].event.apply(_this, workSpace[key].params);
-                            alert("请勿重复提交")
                             if (['[object AsyncFunction]', '[object Promise]'].includes(type)) {
                                 isWork = true;
                             } else {

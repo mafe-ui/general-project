@@ -24,8 +24,11 @@ Vue.use(repeatclick)
 import VueCookies from 'vue-cookies'
 Vue.use(VueCookies)
 
-// websocket
-// import '@/assets/js/socket'
+//引入rem
+import rem from './assets/js/rem.js'
+Vue.use(rem)
+    // websocket
+    // import '@/assets/js/socket'
 
 Vue.config.productionTip = false
 
