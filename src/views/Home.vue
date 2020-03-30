@@ -63,6 +63,9 @@ export default {
 <style lang='scss'>
 .home{
   background: #ca9;
+  span{
+    font-size: rem(16);
+  }
 }
   
 </style>
