@@ -4,21 +4,40 @@
      <div v-asyncClick="{event: requestTest,delayTime:500}">requestTest</div>
      <button @click="requestTest" v-preventReClick>preventReClick</button>
     <!-- @click="scienceClick($event,requestTest)" -->
-    <mf-input />
+    <mf-input @on-blur="handleBlur" v-model="value" inputClasses="basic-slide"  label="name"/>
+    <mf-input @on-blur="handleBlur" v-model="value" inputClasses="clean-slide" label="name"/>
+    <mf-input @on-blur="handleBlur" v-model="value" inputClasses="gate" label="name"/>
+    <mf-input @on-blur="handleBlur" v-model="value" inputClasses="skinny" label="name"/>
+    <mf-input @on-blur="handleBlur" v-model="value" inputClasses="swing" label="name"/>
+    <mf-input @on-blur="handleBlur" v-model="value" inputClasses="spotlight" label="name"/>
+    <mf-input @on-blur="handleBlur" v-model="value"  inputClasses="input__field input__field--hoshi" elementId="input-5" />
+    <mf-input @on-blur="handleBlur" v-model="value"  inputClasses="input__field input__field--madoka" elementId="input-31" />
+
+
+
+
   </div>
 </template>
 
 <script>
 import { getPushurl } from "@/plugins/axios";
-import mfInput from '@/components/mf-input.vue'
+import mfInput from '@/components/input/mf-input.vue'
 export default {
   components:{
     mfInput
+  },
+  data () {
+    return {
+      value:'这是个文本框'
+    }
   },
   methods: {
     requestTest(e){
       console.log(666)
     },
+    handleBlur(val){
+      console.log(val)
+    }
   }
 };
 </script>
