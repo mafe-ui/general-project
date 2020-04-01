@@ -1,6 +1,7 @@
 <template>
   <div>
     about
+
      <div v-asyncClick="{event: requestTest,delayTime:500}">requestTest</div>
      <button @click="requestTest" v-preventReClick>preventReClick</button>
     <!-- @click="scienceClick($event,requestTest)" -->
@@ -24,7 +25,8 @@ import { getPushurl } from "@/plugins/axios";
 import mfInput from '@/components/input/mf-input.vue'
 export default {
   components:{
-    mfInput
+    mfInput,
+
   },
   data () {
     return {
