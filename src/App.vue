@@ -5,16 +5,16 @@
         <router-link to="/about">About</router-link> -->
         <tabs @on-click="goRouter"  v-model="active" :anmited="true" animationDelay="0.3s" lineDelay="0.5s" offsetTop="0" :line="true"  :fixed="true" lineWidth="0.5rem"  lineColor="#58bc58" inactiveColor="#ccc" activeColor="#58bc58" lineHeight="0.03rem" :barPosition="{top:'0'}">
             <!-- to="/about" -->
-            <tabsPane label="home" name="1" to='/'>
+            <tabsPane label="home" name="0" to='/'>
                 <!-- <img src="./assets/logo.png" alt=""> -->
             </tabsPane>
-            <tabsPane label="about" name="2" to='/about'>
+            <tabsPane label="about" name="1" to='/about'>
                 <!-- 2 -->
             </tabsPane>
-            <tabsPane label="news" name="3">
+            <tabsPane label="news" name="2">
                 <!-- 2 -->
             </tabsPane>
-            <tabsPane label="mine" name="4">
+            <tabsPane label="mine" name="3">
                 <!-- 3 -->
             </tabsPane>
         </tabs>
@@ -44,7 +44,6 @@ export default {
     },
     methods: {
         goRouter(label,name) {
-            console.log(label,name)
         },
     }
 }
