@@ -23,9 +23,17 @@
 
     <e-button focusType=2>focusType=2</e-button>
     <e-button  focusType=2 inverted>focusType=2</e-button><br/>
+
+    <e-button focusType=3>focusType=3</e-button>
+    <e-button  focusType=3 inverted>focusType=3</e-button><br/>
     
     disable
     <e-button disabled>disabled</e-button><br/>
+
+
+    loading
+    <e-loading type=1></e-loading>
+
 
   </div>
 </template>
@@ -34,11 +42,13 @@
 // @ is an alias to /src
 import dateFilter from '@/assets/js/dateFilter'
 import eButton from '@/components/button/eButton'
+import eLoading from '@/components/loading/eLoading'
 
 export default {
   name: 'Home',
   components:{
-    'e-button':eButton
+    'e-button':eButton,
+    'e-loading':eLoading,
   },
   data(){
     return {
@@ -62,6 +72,7 @@ export default {
 </script>
 <style lang='scss'>
 .home{
+  height: 100vh;
   background: #ca9;
   span{
     font-size: rem(16);
