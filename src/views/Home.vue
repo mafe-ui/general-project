@@ -8,31 +8,38 @@
     <span>获取本月第一天{{getFirstDayOfMonth}}</span><br/><br/>
 
     hover
-    <e-button hoverType=1>hover</e-button>
-    <e-button hoverType=1 inverted>hover-inverted</e-button><br/>
+    <mf-button hoverType=1>hover</mf-button>
+    <mf-button hoverType=1 inverted>hover-inverted</mf-button><br/>
 
-    <e-button hoverType=2>hoverType=2</e-button>
-    <e-button  hoverType=2 inverted>hoverType=2</e-button><br/>
+    <mf-button hoverType=2>hoverType=2</mf-button>
+    <mf-button  hoverType=2 inverted>hoverType=2</mf-button><br/>
 
-    <e-button hoverType=3>hoverType=3</e-button>
-    <e-button  hoverType=3 inverted>hoverType=3</e-button><br/>
+    <mf-button hoverType=3>hoverType=3</mf-button>
+    <mf-button  hoverType=3 inverted>hoverType=3</mf-button><br/>
 
     focus
-    <e-button focusType=1>focus</e-button>
-    <e-button focusType=1 inverted>focus-inverted</e-button><br/>
+    <mf-button focusType=1>focus</mf-button>
+    <mf-button focusType=1 inverted>focus-inverted</mf-button><br/>
 
-    <e-button focusType=2>focusType=2</e-button>
-    <e-button  focusType=2 inverted>focusType=2</e-button><br/>
+    <mf-button focusType=2>focusType=2</mf-button>
+    <mf-button  focusType=2 inverted>focusType=2</mf-button><br/>
 
-    <e-button focusType=3>focusType=3</e-button>
-    <e-button  focusType=3 inverted>focusType=3</e-button><br/>
+    <mf-button focusType=3>focusType=3</mf-button>
+    <mf-button  focusType=3 inverted>focusType=3</mf-button><br/>
     
     disable
-    <e-button disabled>disabled</e-button><br/>
+    <mf-button disabled>disabled</mf-button><br/>
+
+    click事件
+    <mf-button focusType=1 @click.native="clickBtn">focus</mf-button>
 
 
-    loading
-    <e-loading type=1></e-loading>
+  
+    <mf-loading type=1 :visible=loadingVisible>Loading</mf-loading>
+    <mf-loading type=2 :visible=false>Loading</mf-loading>
+    <mf-loading type=3 :visible=false>Loading</mf-loading>
+    <mf-loading type=4 :visible=false>Loading</mf-loading>
+    <mf-loading :visible=false  :txt=loadingTxt></mf-loading>
 
 
   </div>
@@ -41,14 +48,19 @@
 <script>
 // @ is an alias to /src
 import dateFilter from '@/assets/js/dateFilter'
-import eButton from '@/components/button/eButton'
-import eLoading from '@/components/loading/eLoading'
+import mfButton from '@/components/button/mf-button'
+import mfLoading from '@/components/loading/mf-loading'
+import Vue from 'vue'
+import mfLoadingIndex from '@/components/loading/index'
+Vue.use(mfLoadingIndex)
 
 export default {
+
+
   name: 'Home',
   components:{
-    'e-button':eButton,
-    'e-loading':eLoading,
+    'mf-button':mfButton,
+    'mf-loading':mfLoading,
   },
   data(){
     return {
@@ -58,6 +70,8 @@ export default {
       getPreMonth:'',
       getFirstDayOfWeek:'',
       getFirstDayOfMonth:'',
+      loadingVisible:false,
+      loadingTxt:'加载中...',
     }
   },
   mounted(){
@@ -67,12 +81,26 @@ export default {
     this.getPreMonth = dateFilter.getPreMonth('2019-07-08',6);
     this.getFirstDayOfWeek = dateFilter.getFirstDayOfWeek(new Date());
     this.getFirstDayOfMonth = dateFilter.getFirstDayOfMonth();
+
+    setTimeout(()=>{
+      this.loadingVisible = false
+    },2000)
+  },
+  methods: {
+    clickBtn(){
+      console.log('点击事件')
+      this.$loading.show({type:'2',txt:'jzz'});
+      setTimeout(()=>{
+        this.$loading.close();
+      },2000)
+    }
   }
 }
 </script>
 <style lang='scss'>
 .home{
-  height: 100vh;
+  // height: 100vh;
+  padding-bottom: rem(100);
   background: #ca9;
   span{
     font-size: rem(16);

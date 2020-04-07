@@ -46,6 +46,7 @@ export default {
     }
   },
   methods: {
+    
     reButton() {
       if (this.focusType && this.focusType == 1) {
         this.cls += " button--moema";
