@@ -47,7 +47,7 @@ axios.interceptors.request.use(
             config.headers.common["Authorization"] = "Bearer " + token;
         }
 
-
+        return config;
 
     },
     function(error) {

@@ -55,16 +55,16 @@
             activeColor="#58bc58" 
             lineHeight="0.03rem" 
             :barPosition="{top:'0'}">
-             <tabsPane label="home" name="1" to='/'>
+             <tabsPane label="home" name="0" to='/'>
                <img src="./assets/logo.png" alt="">
              </tabsPane>
-            <tabsPane label="about" name="2" to='/about'>
+            <tabsPane label="about" name="1" to='/about'>
                 2
             </tabsPane>
-            <tabsPane label="news" name="3">
+            <tabsPane label="news" name="2">
                 3
             </tabsPane>
-            <tabsPane label="mine" name="4">
+            <tabsPane label="mine" name="3">
                     4
             </tabsPane>
      </tabs>
