@@ -19,10 +19,16 @@
             </tabsPane>
         </tabs>
     <!-- </div> -->
-    <keep-alive>
-        <router-view v-if="$route.meta.keepAlive"></router-view>
-    </keep-alive>
-    <router-view v-if="!$route.meta.keepAlive"></router-view>
+
+    <transition :name="transitionName">
+        <keep-alive>
+            <router-view v-if="$route.meta.keepAlive"></router-view>
+        </keep-alive>
+    </transition>
+    <transition :name="transitionName">
+        <router-view v-if="!$route.meta.keepAlive"></router-view>
+    </transition>
+        
  
 </div>
 </template>
@@ -40,6 +46,7 @@ export default {
     data() {
         return {
             active: 0,
+            transitionName: 'slide-scale', //初始过渡动画方向
         }
     },
     methods: {
