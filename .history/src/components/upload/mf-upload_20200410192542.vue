@@ -14,10 +14,17 @@
                 <li v-for='(value, key) in imgs'>
                     <p class="img"><img :src="getObjectURL(value)"><a class="close" @click="delImg(key)">×</a></p>
                 </li>
-                 <!-- <div class="progress" v-if="isShow">
+<<<<<<< Updated upstream
+                <div class="progress" v-if="isShow">
+                    <CircleProgress class="progress_svg" ref="$circle" key="duration-model" :isAnimation="false" :isRound="true" :width="width" :radius="radius" :progress="progress" :barColor="barColor" :duration="duration" :delay="delay" :timeFunction="timeFunction" :backgroundColor="backgroundColor">
+                    </CircleProgress>
+                </div>
+=======
+                 <div class="progress" v-if="isShow">
                 <CircleProgress class="progress_svg" ref="$circle" key="duration-model" :isAnimation="false" :isRound="true" :width="width" :radius="radius" :progress="progress" :barColor="barColor" :duration="duration" :delay="delay" :timeFunction="timeFunction" :backgroundColor="backgroundColor">
                 </CircleProgress>
-            </div> -->
+            </div>
+>>>>>>> Stashed changes
             </ul>
         </div>
         <button @click="submit">确定</button>
@@ -145,7 +152,11 @@ export default {
                     this.fil[i]
                 );
             }
+<<<<<<< Updated upstream
+            this.beforeUpload(this.imgs)
+=======
                 this.beforeUpload(this.imgs)
+>>>>>>> Stashed changes
         },
         getObjectURL(file) {
             var url = null;
@@ -197,6 +208,20 @@ export default {
                 url: this.action,
                 data: formData,
                 headers: this.headers,
+<<<<<<< Updated upstream
+                // onUploadProgress: progressEvent => {
+                //     let complete = (progressEvent.loaded / progressEvent.total * 100) - 1 | 0;
+                //     self.progress = complete;
+                //     self.isShow = true;
+                //     console.log("上传 " + self.progress);
+                // },
+            }).then(function (r) {
+                console.log(r);
+                if (r.data.rst == true) {
+                    self.onSuccess(r.data)
+                    alert("上传成功!")
+                }
+=======
                      onUploadProgress: progressEvent => {
                     let complete = (progressEvent.loaded / progressEvent.total * 100) - 1 | 0;
                     self.progress = complete;
@@ -209,6 +234,7 @@ export default {
                        self.onSuccess(r.data)
                      alert("上传成功!")
                  }
+>>>>>>> Stashed changes
             });
         },
         // ======单张=======

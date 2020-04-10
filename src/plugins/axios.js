@@ -26,7 +26,7 @@ let loadingFn = config => {
     }, 1000);
 };
 //不可發送多次請求的接口
-let unrepeatStr = "/api/forgetpwdverify,/api/reg";
+let unrepeatStr = "/api/forgetpwdverify,/api/reg" + uploadApi;
 
 // 添加请求拦截器
 axios.interceptors.request.use(
