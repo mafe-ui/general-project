@@ -14,7 +14,7 @@
                 <li v-for='(value, key) in imgs'>
                     <p class="img"><img :src="getObjectURL(value)"><a class="close" @click="delImg(key)">×</a></p>
                 </li>
-                 <!-- <div class="progress" v-if="isShow">
+                <!-- <div class="progress" v-if="isShow">
                 <CircleProgress class="progress_svg" ref="$circle" key="duration-model" :isAnimation="false" :isRound="true" :width="width" :radius="radius" :progress="progress" :barColor="barColor" :duration="duration" :delay="delay" :timeFunction="timeFunction" :backgroundColor="backgroundColor">
                 </CircleProgress>
             </div> -->
@@ -28,6 +28,7 @@
                 <img :src="frontSrc" alt="">
                 <input type="file" :name="refName" autocomplete="off" :ref="refName" @change="addImg($event)" accept="image/*" v-if="uploadStatus">
             </li>
+            <p>{{title}}</p>
             <!-- <div class="progress-bar" v-show="progress && progress !=100">
                 <div class="progress-percent" :style="{width:progress+'%'}"></div>
                 <div class="tip" :style="{left:progress+'%'}" v-show="progress && progress !=100">{{progress+'%'}}
@@ -65,6 +66,7 @@ export default {
         title: String,
         beforeUpload: Function,
         onSuccess: Function,
+        emitType: String,
         name: {
             type: String,
             default: "file",
@@ -104,7 +106,7 @@ export default {
             // progress: 0,
             //
             isDurationModel: true, // 是否打开持续缓动模式
-            isShow: false,
+            isShow: true,
             width: 100,
             radius: 10,
             progress: 20,
@@ -145,7 +147,7 @@ export default {
                     this.fil[i]
                 );
             }
-                this.beforeUpload(this.imgs)
+            this.beforeUpload(this.imgs)
         },
         getObjectURL(file) {
             var url = null;
@@ -197,7 +199,7 @@ export default {
                 url: this.action,
                 data: formData,
                 headers: this.headers,
-                     onUploadProgress: progressEvent => {
+                onUploadProgress: progressEvent => {
                     let complete = (progressEvent.loaded / progressEvent.total * 100) - 1 | 0;
                     self.progress = complete;
                     self.isShow = true;
@@ -205,10 +207,10 @@ export default {
                 },
             }).then(function (r) {
                 console.log(r);
-                 if (r.data.rst == true) {
-                       self.onSuccess(r.data)
-                     alert("上传成功!")
-                 }
+                if (r.data.rst == true) {
+                    self.onSuccess(self.emitType, r.data)
+                    alert("上传成功!")
+                }
             });
         },
         // ======单张=======
@@ -264,7 +266,7 @@ export default {
                         self.frontStatus = true;
                         self.CardFront = r.data.Url;
                         self.frontSrc = showImg + r.data.Url;
-                        self.onSuccess(r.data)
+                        self.onSuccess(self.emitType, r.data)
                         // self.$parent.$emit(self.emitType, r.data.Url);
                     }
                 } else {
@@ -312,20 +314,20 @@ export default {
 $them-color: #58bc58;
 
 .upload-imgs {
-    margin: 10px 0 30px 0;
+    margin: rem(10) 0 rem(30) 0;
     overflow: hidden;
     font-size: 0;
 }
 
 .upload-imgs li {
     position: relative;
-    width: 118px;
-    height: 118px;
-    font-size: 14px;
+    width: rem(118);
+    height: rem(118);
+    font-size: rem(14);
     display: inline-block;
-    padding: 10px;
-    margin-right: 25px;
-    border: 2px dashed #ccc;
+    padding: rem(10);
+    margin-right: rem(25);
+    border: rem(2) dashed #ccc;
     text-align: center;
     vertical-align: middle;
 }
@@ -338,13 +340,13 @@ $them-color: #58bc58;
     display: block;
     background-color: #ccc;
     color: #ffffff;
-    height: 94px;
-    padding: 8px 0;
+    height: rem(94);
+    padding: rem(8) 0;
 }
 
 .upload-imgs .add .iconfont {
-    padding: 10px 0;
-    font-size: 40px;
+    padding: rem(10) 0;
+    font-size: rem(40);
 }
 
 .upload-imgs li:hover .add {
@@ -357,16 +359,16 @@ $them-color: #58bc58;
     bottom: 0;
     left: 0;
     right: 0;
-    width: 118px;
-    height: 118px;
+    width: rem(118);
+    height: rem(118);
     opacity: 0;
 }
 
 .upload-imgs .img {
     position: relative;
-    width: 94px;
-    height: 94px;
-    line-height: 94px;
+    width: rem(94);
+    height: rem(94);
+    line-height: rem(94);
 }
 
 .upload-imgs .img img {
@@ -383,31 +385,32 @@ $them-color: #58bc58;
 .upload-imgs li:hover .img .close {
     display: block;
     position: absolute;
-    right: -6px;
-    top: -10px;
+    right: -rem(6);
+    top: -rem(10);
     line-height: 1;
-    font-size: 22px;
+    font-size: rem(22);
     color: #aaa;
 }
 
 // =======单张=========
 .upload {
     background-color: #fafafa;
-    border-radius: 4px;
+    border-radius: rem(4);
     border: 1px dashed #e6e6e6;
-    // margin: 30px 0;
+    // margin: rem(30) 0;
 
     p {
         text-align: center;
-        line-height: 40px;
+        line-height: rem(40);
         color: #333333;
+        font-size: rem(18);
         border-top: 1px dashed #f0f0f0;
     }
 
     ul {
         position: relative;
-        height: 158px;
-        padding: 14px 30px;
+        height: rem(158);
+        padding: rem(36) rem(30);
 
         li {
             width: 100%;
@@ -433,12 +436,12 @@ $them-color: #58bc58;
 
 // ===
 .progress-bar {
-    padding-bottom: 50px;
+    padding-bottom: rem(50);
 }
 
 .progress-percent {
-    width: 5px;
-    height: 5px;
+    width: rem(5);
+    height: rem(5);
     background-color: #58bc58;
 }
 
@@ -451,10 +454,13 @@ $them-color: #58bc58;
     bottom: 0;
     background-color: #333;
     opacity: 0.8;
+    vertical-align: middle;
 
     .progress_svg {
-        height: 100%;
-        padding-top: 6%;
+        display: inline-block;
+        margin-top: rem(10);
+        // height: 100%;
+        // padding-top: rem(20);
     }
 }
 </style>
