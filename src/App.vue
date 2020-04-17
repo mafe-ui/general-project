@@ -1,6 +1,9 @@
 <template>
 <div id="app">
-       <!-- <div id="nav"> -->
+    <img src="./assets/logo.png" alt="" class="bg_logo_img">
+
+
+    <!-- <div id="nav"> -->
         <!-- <router-link to="/">Home</router-link> |
         <router-link to="/about">About</router-link> -->
         <tabs @on-click="goRouter"  v-model="active" :anmited="true" animationDelay="0.3s" lineDelay="0.5s" offsetTop="0" :line="true"  :fixed="true" lineWidth="0.5rem"  lineColor="#58bc58" inactiveColor="#ccc" activeColor="#58bc58" lineHeight="0.03rem" :barPosition="{top:'0'}">
@@ -29,6 +32,11 @@
         <router-view v-if="!$route.meta.keepAlive"></router-view>
     </transition>
         
+    <div class="slide-mask" ref="slideMask">
+        <div class="mask top-left"></div>
+        <div class="mask bottom-right"></div>
+        <div class="line" ref="slideLine"></div>
+    </div>
  
 </div>
 </template>
@@ -46,11 +54,25 @@ export default {
     data() {
         return {
             active: 0,
-            transitionName: 'slide-scale', //初始过渡动画方向
+            transitionName: 'slide-mask', //初始过渡动画方向
         }
     },
+    mounted(){
+        let clientWidth = document.body.clientWidth;
+        let clientHeight = document.body.clientHeight;
+        let skewDeg = 180-parseInt(Math.atan(clientWidth/clientHeight)/Math.PI*180)+'deg';
+        this.$refs.slideLine.style.transform = "skew("+skewDeg+")";
+
+    },
+   
     methods: {
         goRouter(label,name) {
+            if(this.transitionName=='slide-mask'){
+                this.$refs.slideMask.style.display = 'block';
+                setTimeout(() => {
+                    this.$refs.slideMask.style.display = 'none';
+                }, 1500);
+            }
         },
     }
 }
@@ -64,6 +86,7 @@ export default {
     text-align: center;
     color: #2c3e50;
     padding-bottom: rem(80);
+    background:white;
 }
 
 #nav {
@@ -78,4 +101,17 @@ export default {
         }
     }
 }
+
+
+.bg_logo_img{
+    position: absolute;
+    width: rem(200);
+    height: rem(200);
+    z-index: -1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+
 </style>
