@@ -264,6 +264,107 @@ input[disabled] {
     }
 }
 
+.slide-mask {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 500;
+    overflow: hidden;
+    .line {
+        position: absolute;
+        width: 5px;
+        height: 100vh;
+        background: white;
+        left: 150vw;
+        top: -100vh;
+        animation: arctan 1s forwards;
+    }
+    .mask {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-width: 100vh 100vw 0 0;
+        border-style: solid;
+        border-color: #ff4d4d #2f2e34;
+        opacity: 0;
+    }
+    .top-left {
+        border-color: #ffad29 transparent transparent transparent;
+        animation: maskLeft 2s;
+    }
+    .bottom-right {
+        border-color: transparent #ffad29 transparent transparent;
+        animation: maskRight 2s;
+    }
+}
+
+@keyframes arctan {
+    0% {
+        left: 150vw;
+        top: -100vh;
+        display: block;
+    }
+    99% {
+        left: 50vw;
+        top: 0;
+        display: block;
+    }
+    100% {
+        display: none;
+    }
+}
+
+@keyframes maskLeft {
+    0% {
+        left: 0;
+        top: 0;
+        opacity: 0;
+    }
+    49% {
+        left: 0;
+        top: 0;
+        opacity: 0;
+    }
+    50% {
+        left: 0;
+        top: 0;
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+        left: -100vw;
+        top: -100vh;
+    }
+}
+
+@keyframes maskRight {
+    0% {
+        left: 0;
+        top: 0;
+        opacity: 0;
+    }
+    49% {
+        left: 0;
+        top: 0;
+        opacity: 0;
+    }
+    50% {
+        left: 0;
+        top: 0;
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+        left: 100vw;
+        top: 100vh;
+    }
+}
+
 //btn
 .btn {
     color: $btn_color;

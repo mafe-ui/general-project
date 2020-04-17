@@ -106,7 +106,7 @@ export default {
             // progress: 0,
             //
             isDurationModel: true, // 是否打开持续缓动模式
-            isShow: true,
+            isShow: false,
             width: 100,
             radius: 10,
             progress: 20,

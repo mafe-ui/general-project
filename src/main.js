@@ -34,6 +34,7 @@ Vue.config.productionTip = false
 
 // 路由守卫
 router.beforeEach((to, from, next) => {
+    console.log('sfsf')
     if (to.meta.requireAuth) { // 判断该路由是否需要登录权限
         if (localStorage.hasOwnProperty('Token')) { // 判断本地是否存在access_token
             next()
