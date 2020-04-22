@@ -53,7 +53,7 @@ export default {
     },
     data() {
         return {
-            active: 0,
+            active: 1,
             transitionName: 'slide-mask', //初始过渡动画方向
         }
     },

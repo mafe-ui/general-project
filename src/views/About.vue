@@ -13,9 +13,9 @@
     <mf-input @on-blur="handleBlur" v-model="value" inputClasses="spotlight" label="name" />
     <mf-input @on-blur="handleBlur" v-model="value" inputClasses="input__field input__field--hoshi" elementId="input-5" />
     <mf-input @on-blur="handleBlur" v-model="value" inputClasses="input__field input__field--madoka" elementId="input-31" />
-    <mf-upload  :before-upload="handleBeforeUpload "  :on-success="handleAvatarSuccess" compressor :action="uploadApi" :headers="headers" emitType='CardBack1' name='idName'   title='身份证反面图像'  />
+    <mf-upload  :before-upload="handleBeforeUpload " multiple  :on-success="handleAvatarSuccess" compressor :action="uploadApi" :headers="headers" emitType='CardBack1' name='idName'   title='身份证反面图像'  />
     <mf-upload  :before-upload="handleBeforeUpload "  :on-success="handleAvatarSuccess" compressor :action="uploadApi" :headers="headers" emitType='CardBack2' name='idName'   title='身份证反面图像'  />
-    <mf-upload  :before-upload="handleBeforeUpload " imgSrc="1586940611993.png" :uploadStatus="false"  :on-success="handleAvatarSuccess" compressor :action="uploadApi" :headers="headers" emitType='CardBack3' name='idName'   title='身份证反面图像'  />
+    <mf-upload  :before-upload="handleBeforeUpload "  imgSrc="1586940611993.png" :uploadStatus="false"  :on-success="handleAvatarSuccess" compressor :action="uploadApi" :headers="headers" emitType='CardBack3' name='idName'   title='身份证反面图像'  />
 
 
 </div>
