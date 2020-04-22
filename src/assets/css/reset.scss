@@ -20,6 +20,7 @@ $text_yellow:#faa302;
 $bg_color: #f0f0f0; //页面背景颜色
 $bg_color_gray:#1d1d1f;
 $border_color: #2f2e34;
+$sel_color:#c59c5a; //屏幕切换颜色
 body,
 div,
 span,
@@ -266,7 +267,7 @@ input[disabled] {
 
 .slide-mask {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
@@ -294,11 +295,11 @@ input[disabled] {
         opacity: 0;
     }
     .top-left {
-        border-color: #ffad29 transparent transparent transparent;
+        border-color: $sel_color transparent transparent transparent;
         animation: maskLeft 2s;
     }
     .bottom-right {
-        border-color: transparent #ffad29 transparent transparent;
+        border-color: transparent $sel_color transparent transparent;
         animation: maskRight 2s;
     }
 }

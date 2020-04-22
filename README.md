@@ -319,6 +319,28 @@ for (let key in vueFilter) {
 </template>
 ```
 
+## 七、屏幕切换动效
+#### 用法
+App.vue
 
+修改transitionName的值，可以修改效果
+* slide-left
+* slide-right
+* slide-hide
+* slide-scale
+* slide-mask
+```js
+<script>
+export default { 
+  data() {
+    return {
+      transitionName: "slide-left", //初始过渡动画方向 {slide-left，slide-right,slide-hide,slide-scale,slide-mask}
+    };
+  },
+```
+slide-mask颜色修改
+> src/assets/css/reset.scss
+```scss
+$sel_color:#c59c5a; //屏幕切换颜色
 
 
