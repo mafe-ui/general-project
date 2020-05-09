@@ -6,7 +6,7 @@
     <!-- <div id="nav"> -->
         <!-- <router-link to="/">Home</router-link> |
         <router-link to="/about">About</router-link> -->
-        <tabs @on-click="goRouter"  v-model="active" :anmited="true" animationDelay="0.3s" lineDelay="0.5s" offsetTop="0" :line="true"  :fixed="true" lineWidth="0.5rem"  lineColor="#58bc58" inactiveColor="#ccc" activeColor="#58bc58" lineHeight="0.03rem" :barPosition="{top:'0'}">
+        <tabs @on-click="goRouter"  v-model="active" :anmited="true" animationDelay="0.3s" lineDelay="0.5s" offsetTop="0" :line="true"  :fixed="true" :absolute=absBl lineWidth="0.5rem"  lineColor="#58bc58" inactiveColor="#ccc" activeColor="#58bc58" lineHeight="0.03rem" :barPosition="{top:'0'}">
             <!-- to="/about" -->
             <tabsPane label="home" name="0" to=''>
                 <!-- <img src="./assets/logo.png" alt=""> -->
@@ -54,18 +54,20 @@ export default {
     return {
       beforeActive: -1,
       active: 0,
-      transitionName: "slide-left", //初始过渡动画方向 {slide-left，slide-right,slide-hide,slide-scale,slide-mask}
-      arr: [{ path: "/" }, { path: "/about" }]
+      transitionName: "slide-mask", //初始过渡动画方向 {slide-left，slide-right,slide-hide,slide-scale,slide-mask}
+      arr: [{ path: "/" }, { path: "/about" }],
+      absBl:false,
     };
   },
   watch: {
     $route(to, from) {
-        const toDepth = to.path.split("/").length;
-        const fromDepth = from.path.split("/").length;
-        if(toDepth != fromDepth){
-            this.transitionName = toDepth < fromDepth ? "slide-right" : "slide-left";
-            window.scrollTo(0, 0);
-        }
+      const toDepth = to.path.split("/").length;
+      const fromDepth = from.path.split("/").length;
+      if (toDepth != fromDepth) {
+        this.transitionName =
+          toDepth < fromDepth ? "slide-right" : "slide-left";
+        window.scrollTo(0, 0);
+      }
     }
   },
   mounted() {
@@ -83,21 +85,29 @@ export default {
 
   methods: {
     //tab跳转
+   
     goRouter(label, name) {
-      if (
-        this.transitionName == "slide-left" ||
-        this.transitionName == "slide-right"
-      ) {
-        if (this.beforeActive < this.active) {
-          this.transitionName = "slide-right";
-        } else {
-          this.transitionName = "slide-left";
+      let _this = this;
+      (async function routerPromise(name){
+        _this.absBl = true;
+
+        if (
+          _this.transitionName == "slide-left" ||
+          _this.transitionName == "slide-right"
+        ) {
+          if (_this.beforeActive < _this.active) {
+            _this.transitionName = "slide-right";
+          } else {
+            _this.transitionName = "slide-left";
+          }
         }
-      }
-        this.$router.push({
-          path: this.arr[name].path
+        _this.$router.push({
+          path: _this.arr[name].path
         });
-        this.beforeActive = this.active;
+        _this.beforeActive = _this.active;
+      })(name).then(result=>{
+        _this.absBl = false;
+      })
     },
     //slide-mask 显示消失
     allRouter() {
@@ -182,13 +192,13 @@ export default {
 }
 
 .child-view {
-    position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-			height: 100%;
-      -moz-box-sizing: border-box;
-             box-sizing: border-box;
-    transition: all .6s  cubic-bezier(0.42, 0, 0.58, 1.0);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  transition: all 0.6s cubic-bezier(0.42, 0, 0.58, 1);
 }
 </style>

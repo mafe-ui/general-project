@@ -36,6 +36,9 @@ $text_default:#3399ff;
         bottom: 0;
         border-top: 1px solid #f0f0f0;
     }
+    &-absolute-bar {
+        position: absolute;
+    }
     &-sticky-bar {
         position: sticky;
         top: 0;

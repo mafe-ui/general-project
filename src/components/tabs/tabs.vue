@@ -1,5 +1,5 @@
 <template>
-<div class="mf-tabs " :style="currentOffsetTop" :class="[{'mf-tabs-fix-bar':fixed},{'mf-tabs-sticky-bar':sticky}]">
+<div class="mf-tabs " :style="currentOffsetTop" :class="[{'mf-tabs-fix-bar':fixed},{'mf-tabs-absolute-bar':absolute},{'mf-tabs-sticky-bar':sticky}]">
     <div class="mf-tabs-bar"  >
         <!--标签页标题，通过v-for实现循环-->
         <div :class="tabCls(item)" v-for="(item,index) in navList" :key="item.name">
@@ -41,6 +41,10 @@ export default {
             default: false,
         },
         fixed: {
+            type: Boolean,
+            default: false,
+        },
+        absolute: {
             type: Boolean,
             default: false,
         },
